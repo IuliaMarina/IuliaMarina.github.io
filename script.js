@@ -167,10 +167,10 @@ $(document).ready(function(){
 		
 		if(!isGameOver){
 			for(var i =0; i<snake.length;++i){
-				snake[i].drawSquare("RED");
+				snake[i].drawSquare("GREEN");
 			}
 		}
-		apple.drawSquare("GREEN");
+		apple.drawSquare("RED");
 		drawBorder();
 	
 		drawScore();
