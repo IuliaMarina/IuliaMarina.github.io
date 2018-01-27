@@ -1,0 +1,19 @@
+#canvas {
+	color: #000000;
+
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+{ margin: 0; padding: 0; }
+
+html { 
+	  background: url('snake.jpg') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+}
