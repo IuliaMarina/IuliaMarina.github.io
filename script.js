@@ -8,6 +8,9 @@ var LEFT =-1;
 var UP =2;
 var DOWN =-2;
 
+var snake, apple, direction, isGameOver, changedDirection;
+
+
 $(document).ready(function(){
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
@@ -16,7 +19,7 @@ $(document).ready(function(){
 	canvas.width = WIDTH;
 	canvas.height = HEIGHT;
 
-	var timer = 10.0 / FPS;
+	var timer = 15.0 / FPS;
 
 	var widthBlock = WIDTH/BLOCK_SIZE;
 	var heightBlock = HEIGHT/BLOCK_SIZE;
@@ -54,7 +57,9 @@ $(document).ready(function(){
 		context.fillStyle = "Black";
  		context.textAlign = "center";
  		context.textBaseline = "middle";
- 		context.fillText("Game Over", WIDTH / 2, HEIGHT / 2);
+		 context.fillText("Game Over.", WIDTH / 2, HEIGHT / 2);
+		 context.font = "50px Arial";
+		 context.fillText("Press R to restart.", WIDTH / 2, HEIGHT / 2 + 60);
 
 	}
 
@@ -73,26 +78,11 @@ $(document).ready(function(){
 		return this.col == otherBlock.col && this.row == otherBlock.row;
 	};
 
-	var snake =[new block(12,12), new block(13,12), new block(14,12)];
-	//snake for eat itself
-	//var snake =[new block(12,12), new block(13,12), new block(14,12), new block(14,13), new block(13,13)];
-	var direction = DOWN;
-	var isGameOver = false;
-	var getRandomInt =function(min, max) {
+	var getRandomInt = function(min, max) {
     	return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
-	
-	//var apple = new block(getRandomInt(1,24),getRandomInt(1,24));
-	var apple = new block(19,12);
-	var changedDirection = false;
 
 
-	window.addEventListener('keydown', function (e) {
-        if (e.keyCode == 39 && direction != LEFT && !changedDirection) { direction = RIGHT; changedDirection = true; }
-    	if (e.keyCode == 37 && direction != RIGHT && !changedDirection) { direction = LEFT; changedDirection = true;}
-    	if (e.keyCode == 38 && direction != DOWN && !changedDirection) { direction = UP; changedDirection = true;}
-    	if (e.keyCode == 40 && direction != UP && !changedDirection) { direction = DOWN; changedDirection = true;}
-    });
 
 	var update = function() {
 		context.clearRect(0, 0, canvas.width, canvas.height);
@@ -184,7 +174,32 @@ $(document).ready(function(){
 		
 	}
 
+	var initialize = function(){
+		snake =[new block(12,12), new block(13,12), new block(14,12)];
+		//snake for eat itself
+		//var snake =[new block(12,12), new block(13,12), new block(14,12), new block(14,13), new block(13,13)];
+		direction = DOWN;
+		isGameOver = false;
+		//var apple = new block(getRandomInt(1,24),getRandomInt(1,24));
+		apple = new block(19,12);
+		changedDirection = false;
+		apples =0;
 
+		update();
+	}
 
-	update();
+	$("#mybutton").click(function(){
+		initialize();
+	})
+
+	window.addEventListener('keydown', function (e) {
+        if (e.keyCode == 39 && direction != LEFT && !changedDirection) { direction = RIGHT; changedDirection = true; }
+    	if (e.keyCode == 37 && direction != RIGHT && !changedDirection) { direction = LEFT; changedDirection = true;}
+    	if (e.keyCode == 38 && direction != DOWN && !changedDirection) { direction = UP; changedDirection = true;}
+		if (e.keyCode == 40 && direction != UP && !changedDirection) { direction = DOWN; changedDirection = true;}
+		if (e.keyCode == 82) { initialize(); }
+    });
+
+	initialize();
+
 });

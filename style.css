@@ -17,3 +17,10 @@ html {
         -o-background-size: cover;
         background-size: cover;
 }
+
+#mybutton {
+    background-color: rgb(218, 15, 15);
+    border-radius: 8px;
+    font-size: 25px;
+    width: 25%;
+}
