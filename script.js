@@ -57,9 +57,9 @@ $(document).ready(function(){
 		context.fillStyle = "Black";
  		context.textAlign = "center";
  		context.textBaseline = "middle";
-		 context.fillText("Game Over.", WIDTH / 2, HEIGHT / 2);
-		 context.font = "50px Arial";
-		 context.fillText("Press R to restart.", WIDTH / 2, HEIGHT / 2 + 60);
+		context.fillText("Game Over.", WIDTH / 2, HEIGHT / 2);
+		context.font = "50px Arial";
+		context.fillText("Press R to restart.", WIDTH / 2, HEIGHT / 2 + 60);
 
 	}
 
@@ -144,7 +144,20 @@ $(document).ready(function(){
 				break;			
 			}
 			snake.push(apple);
-			apple = new block(getRandomInt(1,widthBlock-2),getRandomInt(1,heightBlock-2));
+			var conflict;
+			do{
+				apple = new block(getRandomInt(1,widthBlock-2),getRandomInt(1,heightBlock-2));
+				conflict = false;
+				for(var i =0; i<snake[snake.length-1]; ++i){
+					if(snake[i] == apple){
+						conflict= true;
+						break;
+					}
+				}
+
+			}				
+			while(conflict)
+			
 			apples++;
 		}
 		
